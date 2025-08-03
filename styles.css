@@ -103,3 +103,181 @@ p {
     gap: 10px;
     flex: 1;
 }
+
+/* Prescription Form Styles */
+.sec1 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.sec1 h2 {
+    color: #333;
+    margin-top: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.frequency-buttons,
+.timing-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.freq-btn,
+.timing-btn {
+    padding: 10px 15px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.freq-btn:hover,
+.timing-btn:hover {
+    background-color: #d0d0d0;
+}
+
+.freq-btn.active,
+.timing-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* History Section Styles */
+.sec2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.sec2 .bio {
+    color: #333;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.prescription-record {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.prescription-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.prescription-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.prescription-date {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+}
+
+.prescription-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.prescription-details strong {
+    color: #333;
+}
+
+.prescription-divider {
+    margin: 15px 0;
+    border: 0;
+    height: 1px;
+    background-color: #eee;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .frequency-buttons,
+    .timing-buttons {
+        flex-direction: column;
+    }
+    
+    .freq-btn,
+    .timing-btn {
+        width: 100%;
+    }
+    
+    .prescription-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .prescription-date {
+        margin-top: 5px;
+    }
+}
+
