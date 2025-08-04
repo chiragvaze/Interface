@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interface 1</title>
+    <link rel="stylesheet" href="styles.css" />
+
+     <script>
+        // Prescription history array
+        let prescriptionHistory = [];
+        
+        // Function to handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const medicine = document.getElementById('medicine').value;
+            const dosage = document.getElementById('dosage').value;
+            const duration = document.getElementById('duration').value;
+            const frequency = document.getElementById('frequency').value;
+            const timing = document.getElementById('timing').value;
+            const instructions = document.getElementById('instructions').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Create prescription object
+            const prescription = {
+                id: Date.now(), // Unique ID based on timestamp
+                medicine: medicine,
+                dosage: dosage,
+                duration: duration,
+                frequency: frequency,
+                timing: timing,
+                instructions: instructions,
+                notes: notes,
+                date: new Date() // Current date and time
+            };
+            
+            // Add to history array
+            prescriptionHistory.push(prescription);
+            
+            // Display in history section
+            displayPrescriptionInHistory(prescription);
+            
+            // Reset form
+            document.getElementById('prescriptionForm').reset();
+            document.getElementById('frequency').value = '';
+            document.getElementById('timing').value = '';
+            
+            // Reset button active states
+            document.querySelectorAll('.freq-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.timing-btn').forEach(btn => btn.classList.remove('active'));
+        }
+        
+        // Function to display prescription in history section
+        function displayPrescriptionInHistory(prescription) {
+            const historySection = document.querySelector('.sec2');
+            
+            // Format date and time
+            const dateObj = prescription.date;
+            const dateStr = dateObj.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            const timeStr = dateObj.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            // Create prescription element
+            const prescriptionElement = document.createElement('div');
+            prescriptionElement.className = 'prescription-record';
+            prescriptionElement.innerHTML = `
+                <div class="prescription-header">
+                    <h3>${prescription.medicine.charAt(0).toUpperCase() + prescription.medicine.slice(1)}</h3>
+                    <span class="prescription-date">${dateStr} at ${timeStr}</span>
+                </div>
+                <div class="prescription-details">
+                    <p><strong>Dosage:</strong> ${prescription.dosage}</p>
+                    <p><strong>Duration:</strong> ${prescription.duration}</p>
+                    ${prescription.frequency ? `<p><strong>Frequency:</strong> ${prescription.frequency}</p>` : ''}
+                    ${prescription.timing ? `<p><strong>Timing:</strong> ${prescription.timing}</p>` : ''}
+                    ${prescription.instructions ? `<p><strong>Instructions:</strong> ${prescription.instructions}</p>` : ''}
+                    ${prescription.notes ? `<p><strong>Notes:</strong> ${prescription.notes}</p>` : ''}
+                </div>
+                <hr class="prescription-divider">
+            `;
+            
+            // Insert after the "History" header or before the last hr if exists
+            const historyHeader = historySection.querySelector('p.bio');
+            if (historyHeader.nextSibling) {
+                historySection.insertBefore(prescriptionElement, historyHeader.nextSibling);
+            } else {
+                historySection.appendChild(prescriptionElement);
+            }
+        }
+        
+        // Function to handle frequency button clicks
+        function handleFrequencyClick(event) {
+            const button = event.target;
+            const frequencyValue = button.getAttribute('data-frequency');
+            
+            // Toggle active class
+            button.classList.toggle('active');
+            
+            // Update hidden input
+            const frequencyInput = document.getElementById('frequency');
+            let currentValues = frequencyInput.value.split(',').filter(val => val.trim() !== '');
+            
+            if (button.classList.contains('active')) {
+                // Add value
+                if (!currentValues.includes(frequencyValue)) {
+                    currentValues.push(frequencyValue);
+                }
+            } else {
+                // Remove value
+                currentValues = currentValues.filter(val => val !== frequencyValue);
+            }
+            
+            frequencyInput.value = currentValues.join(', ');
+        }
+        
+        // Function to handle timing button clicks
+        function handleTimingClick(event) {
+            const buttons = document.querySelectorAll('.timing-btn');
+            const button = event.target;
+            const timingValue = button.getAttribute('data-timing');
+            
+            // Remove active class from all timing buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Update hidden input
+            const timingInput = document.getElementById('timing');
+            timingInput.value = timingValue;
+        }
+        
+        // Add event listeners when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const prescriptionForm = document.getElementById('prescriptionForm');
+            if (prescriptionForm) {
+                prescriptionForm.addEventListener('submit', handleFormSubmit);
+            }
+            
+            // Frequency buttons
+            const freqButtons = document.querySelectorAll('.freq-btn');
+            freqButtons.forEach(button => {
+                button.addEventListener('click', handleFrequencyClick);
+            });
+            
+            // Timing buttons
+            const timingButtons = document.querySelectorAll('.timing-btn');
+            timingButtons.forEach(button => {
+                button.addEventListener('click', handleTimingClick);
+            });
+        });
+    </script>
+
+    
+   
+</head>
+<body>
+    <div class="d1">
+        <img src="./image/sample-profile-photo2.jpg" alt="profile image" class="profile-image" />
+        <div class="text-content">
+            <h1 class="name">Chirag Vaze</h1>
+            <div class="gen">
+                <p class="gender">M</p>
+            </div>
+            <p class="age">Age - 19</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sec1">
+            <h2>Prescription Form</h2>
+            <form id="prescriptionForm">
+                <!-- Medicine Selection -->
+                <div class="form-group">
+                    <label for="medicine">Medicine:</label>
+                    <select id="medicine" name="medicine" required>
+                        <option value="">Select a medicine</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="ibuprofen">Ibuprofen</option>
+                        <option value="amoxicillin">Amoxicillin</option>
+                        <option value="omeprazole">Omeprazole</option>
+                        <option value="loratadine">Loratadine</option>
+                        <option value="aspirin">Aspirin</option>
+                        <option value="metformin">Metformin</option>
+                        <option value="atorvastatin">Atorvastatin</option>
+                        <option value="lisinopril">Lisinopril</option>
+                        <option value="salbutamol">Salbutamol</option>
+                    </select>
+                </div>
+                
+                <!-- Dosage -->
+                <div class="form-group">
+                    <label for="dosage">Dosage:</label>
+                    <input type="text" id="dosage" name="dosage" placeholder="e.g., 500mg" required>
+                </div>
+                
+                <!-- Duration -->
+                <div class="form-group">
+                    <label for="duration">Duration:</label>
+                    <input type="text" id="duration" name="duration" placeholder="e.g., 7 days" required>
+                </div>
+                
+                <!-- Frequency (Morning, Afternoon, Evening, Night) -->
+                <div class="form-group">
+                    <label>Frequency:</label>
+                    <div class="frequency-buttons">
+                        <button type="button" class="freq-btn" data-frequency="morning">Morning</button>
+                        <button type="button" class="freq-btn" data-frequency="afternoon">Afternoon</button>
+                        <button type="button" class="freq-btn" data-frequency="evening">Evening</button>
+                        <button type="button" class="freq-btn" data-frequency="night">Night</button>
+                    </div>
+                    <input type="hidden" id="frequency" name="frequency">
+                </div>
+                
+                <!-- Timing (Before/After meals) -->
+                <div class="form-group">
+                    <label>Timing:</label>
+                    <div class="timing-buttons">
+                        <button type="button" class="timing-btn" data-timing="before-breakfast">Before Breakfast</button>
+                        <button type="button" class="timing-btn" data-timing="after-breakfast">After Breakfast</button>
+                        <button type="button" class="timing-btn" data-timing="before-lunch">Before Lunch</button>
+                        <button type="button" class="timing-btn" data-timing="after-lunch">After Lunch</button>
+                        <button type="button" class="timing-btn" data-timing="before-dinner">Before Dinner</button>
+                        <button type="button" class="timing-btn" data-timing="after-dinner">After Dinner</button>
+                    </div>
+                    <input type="hidden" id="timing" name="timing">
+                </div>
+                
+                <!-- Instructions -->
+                <div class="form-group">
+                    <label for="instructions">Instructions:</label>
+                    <textarea id="instructions" name="instructions" rows="3" placeholder="Additional instructions for the patient"></textarea>
+                </div>
+                
+                <!-- Notes -->
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" name="notes" rows="2" placeholder="Additional notes"></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Add Prescription</button>
+                </div>
+            </form>
+        </div>
+        <div class="sec2">
+            <p class="bio">History</p>
+        </div>
+        <div class="sec3">
+            <p class="bio">Diseases</p>
+        </div>
+    </div>
+</body>
+</html>
