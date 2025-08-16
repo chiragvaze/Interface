@@ -1,0 +1,202 @@
+// Prescription history array
+let prescriptionHistory = [];
+let currentPrescription = {
+    medicines: [],
+    date: new Date(),
+    id: Date.now()
+};
+
+// Function to add medicine to current prescription
+function addMedicineToPrescription() {
+    const medicine = document.getElementById('medicine').value;
+    const dosage = document.getElementById('dosage').value;
+    const duration = document.getElementById('duration').value;
+    const frequency = document.getElementById('frequency').value;
+    const timing = document.getElementById('timing').value;
+    const instructions = document.getElementById('instructions').value;
+    const notes = document.getElementById('notes').value;
+
+    if (!medicine || !dosage || !duration) {
+        alert('Please fill in medicine, dosage, and duration');
+        return;
+    }
+
+    const medicineObj = {
+        id: Date.now() + Math.random(),
+        medicine: medicine,
+        dosage: dosage,
+        duration: duration,
+        frequency: frequency,
+        timing: timing,
+        instructions: instructions,
+        notes: notes
+    };
+
+    currentPrescription.medicines.push(medicineObj);
+    displayCurrentMedicineList();
+
+    // Reset form
+    document.getElementById('medicine').value = '';
+    document.getElementById('dosage').value = '';
+    document.getElementById('duration').value = '';
+    document.getElementById('frequency').value = '';
+    document.getElementById('timing').value = '';
+    document.getElementById('instructions').value = '';
+    document.getElementById('notes').value = '';
+
+    // Reset button active states
+    document.querySelectorAll('.freq-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.timing-btn').forEach(btn => btn.classList.remove('active'));
+}
+
+// Function to display current medicine list
+function displayCurrentMedicineList() {
+    const medicineList = document.getElementById('currentMedicineList');
+    medicineList.innerHTML = '';
+
+    currentPrescription.medicines.forEach((med, index) => {
+        const medicineItem = document.createElement('div');
+        medicineItem.className = 'medicine-item';
+        medicineItem.innerHTML = `
+            <div class="medicine-info">
+                <strong>${med.medicine}</strong> - ${med.dosage} for ${med.duration}
+                ${med.frequency ? `<br><small>Frequency: ${med.frequency}</small>` : ''}
+                ${med.timing ? `<br><small>Timing: ${med.timing}</small>` : ''}
+            </div>
+            <button type="button" class="remove-medicine" onclick="removeMedicine(${index})">Remove</button>
+        `;
+        medicineList.appendChild(medicineItem);
+    });
+
+    const medicineListSection = document.getElementById('medicineListSection');
+    if (currentPrescription.medicines.length > 0) {
+        medicineListSection.style.display = 'block';
+    } else {
+        medicineListSection.style.display = 'none';
+    }
+}
+
+// Function to remove medicine from current prescription
+function removeMedicine(index) {
+    currentPrescription.medicines.splice(index, 1);
+    displayCurrentMedicineList();
+}
+
+// Function to submit entire prescription
+function submitPrescription() {
+    if (currentPrescription.medicines.length === 0) {
+        alert('Please add at least one medicine to the prescription');
+        return;
+    }
+
+    const prescription = {
+        id: Date.now(),
+        medicines: [...currentPrescription.medicines],
+        date: new Date(),
+        prescriptionNumber: `RX-${Date.now().toString().slice(-6)}`
+    };
+
+    prescriptionHistory.push(prescription);
+    displayPrescriptionInHistory(prescription);
+
+    // Reset current prescription
+    currentPrescription = {
+        medicines: [],
+        date: new Date(),
+        id: Date.now()
+    };
+
+    displayCurrentMedicineList();
+}
+
+// Function to display prescription in history section
+function displayPrescriptionInHistory(prescription) {
+    const historySection = document.getElementById('prescriptionHistoryList');
+
+    const dateObj = prescription.date;
+    const dateStr = dateObj.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+    const timeStr = dateObj.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    const prescriptionElement = document.createElement('div');
+    prescriptionElement.className = 'prescription-history-item';
+    prescriptionElement.innerHTML = `
+        <div class="prescription-summary" onclick="togglePrescriptionDetails(${prescription.id})">
+            <div class="prescription-header">
+                <h3>Prescription ${prescription.prescriptionNumber}</h3>
+                <span class="prescription-date">${dateStr} at ${timeStr}</span>
+            </div>
+            <div class="prescription-preview">
+                ${prescription.medicines.length} medicine(s) prescribed
+            </div>
+            <div class="dropdown-icon">▼</div>
+        </div>
+        <div class="prescription-details" id="details-${prescription.id}" style="display: none;">
+            <div class="medicine-list">
+                ${prescription.medicines.map(med => `
+                    <div class="medicine-detail">
+                        <h4>${med.medicine}</h4>
+                        <p><strong>Dosage:</strong> ${med.dosage}</p>
+                        <p><strong>Duration:</strong> ${med.duration}</p>
+                        ${med.frequency ? `<p><strong>Frequency:</strong> ${med.frequency}</p>` : ''}
+                        ${med.timing ? `<p><strong>Timing:</strong> ${med.timing}</p>` : ''}
+                        ${med.instructions ? `<p><strong>Instructions:</strong> ${med.instructions}</p>` : ''}
+                        ${med.notes ? `<p><strong>Notes:</strong> ${med.notes}</p>` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+
+    historySection.appendChild(prescriptionElement);
+}
+
+// Function to toggle prescription details
+function togglePrescriptionDetails(prescriptionId) {
+    const detailsElement = document.getElementById(`details-${prescriptionId}`);
+    const dropdownIcon = document.querySelector(`[onclick="togglePrescriptionDetails(${prescriptionId})"] .dropdown-icon`);
+
+    if (detailsElement.style.display === 'none') {
+        detailsElement.style.display = 'block';
+        dropdownIcon.textContent = '▲';
+        dropdownIcon.classList.add('rotated');
+    } else {
+        detailsElement.style.display = 'none';
+        dropdownIcon.textContent = '▼';
+        dropdownIcon.classList.remove('rotated');
+    }
+}
+
+// Event listeners for frequency and timing buttons
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.freq-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const frequencyInput = document.getElementById('frequency');
+            let values = frequencyInput.value.split(',').filter(v => v.trim());
+            const freq = this.getAttribute('data-frequency');
+
+            if (this.classList.contains('active')) {
+                if (!values.includes(freq)) values.push(freq);
+            } else {
+                values = values.filter(v => v !== freq);
+            }
+
+            frequencyInput.value = values.join(', ');
+        });
+    });
+
+    document.querySelectorAll('.timing-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.timing-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('timing').value = this.getAttribute('data-timing');
+        });
+    });
+});
