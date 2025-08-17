@@ -6,6 +6,9 @@ let currentPrescription = {
     id: Date.now()
 };
 
+// Disease array storage
+let diseaseHistory = [];
+
 // Function to add medicine to current prescription
 function addMedicineToPrescription() {
     const medicine = document.getElementById('medicine').value;
@@ -173,6 +176,105 @@ function togglePrescriptionDetails(prescriptionId) {
     }
 }
 
+// Function to toggle disease form
+function toggleDiseaseForm() {
+    const formSection = document.getElementById('diseaseFormSection');
+    if (formSection.style.display === 'none') {
+        formSection.style.display = 'block';
+    } else {
+        formSection.style.display = 'none';
+    }
+}
+
+// Function to submit disease
+function submitDisease() {
+    const diseaseName = document.getElementById('diseaseName').value;
+    const diagnosisDate = document.getElementById('diagnosisDate').value;
+    const severity = document.getElementById('severity').value;
+    const symptoms = document.getElementById('symptoms').value;
+    const treatment = document.getElementById('treatment').value;
+    const doctorNotes = document.getElementById('doctorNotes').value;
+
+    if (!diseaseName || !diagnosisDate || !severity) {
+        alert('Please fill in disease name, diagnosis date, and severity');
+        return;
+    }
+
+    const diseaseObj = {
+        id: Date.now(),
+        diseaseName: diseaseName,
+        diagnosisDate: diagnosisDate,
+        severity: severity,
+        symptoms: symptoms,
+        treatment: treatment,
+        doctorNotes: doctorNotes,
+        date: new Date()
+    };
+
+    diseaseHistory.push(diseaseObj);
+    displayDiseaseInList(diseaseObj);
+    toggleDiseaseForm();
+
+    // Reset form
+    document.getElementById('diseaseForm').reset();
+}
+
+// Function to display disease in list
+function displayDiseaseInList(disease) {
+    const diseaseList = document.getElementById('diseaseList');
+    
+    const diseaseElement = document.createElement('div');
+    diseaseElement.className = 'disease-item';
+    
+    const dateObj = new Date(disease.date);
+    const dateStr = dateObj.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+
+    diseaseElement.innerHTML = `
+        <div class="disease-summary" onclick="toggleDiseaseDetails(${disease.id})">
+            <div class="disease-header">
+                <h3>${disease.diseaseName}</h3>
+                <span class="disease-date">${dateStr}</span>
+            </div>
+            <div class="disease-preview">
+                ${disease.severity} - ${disease.symptoms.substring(0, 50)}...
+            </div>
+            <div class="dropdown-icon">▼</div>
+        </div>
+        <div class="disease-details" id="details-${disease.id}" style="display: none;">
+            <div class="disease-detail">
+                <h4>${disease.diseaseName}</h4>
+                <p><strong>Diagnosis Date:</strong> ${dateStr}</p>
+                <p><strong>Severity:</strong> ${disease.severity}</p>
+                <p><strong>Symptoms:</strong> ${disease.symptoms}</p>
+                <p><strong>Treatment:</strong> ${disease.treatment}</p>
+                <p><strong>Doctor Notes:</strong> ${disease.doctorNotes}</p>
+            </div>
+        </div>
+    `;
+
+    diseaseList.appendChild(diseaseElement);
+}
+
+// Function to toggle disease details
+function toggleDiseaseDetails(diseaseId) {
+    const detailsElement = document.getElementById(`details-${diseaseId}`);
+    const dropdownIcon = document.querySelector(`[onclick="toggleDiseaseDetails(${diseaseId})"] .dropdown-icon`);
+
+    if (detailsElement.style.display === 'none') {
+        detailsElement.style.display = 'block';
+        dropdownIcon.textContent = '▲';
+        dropdownIcon.classList.add('rotated');
+    } else {
+        detailsElement.style.display = 'none';
+        dropdownIcon.textContent = '▼';
+        dropdownIcon.classList.remove('rotated');
+    }
+}
+
 // Event listeners for frequency and timing buttons
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.freq-btn').forEach(btn => {
@@ -198,5 +300,17 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             document.getElementById('timing').value = this.getAttribute('data-timing');
         });
+    });
+
+    // Initialize with sample disease
+    displayDiseaseInList({
+        id: 1,
+        diseaseName: "Diabetes Type 2",
+        diagnosisDate: "2024-01-15",
+        severity: "moderate",
+        symptoms: "Increased thirst, frequent urination, fatigue",
+        treatment: "Metformin 500mg twice daily, diet control",
+        doctorNotes: "Monitor blood sugar levels regularly",
+        date: new Date()
     });
 });

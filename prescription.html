@@ -109,7 +109,59 @@
         </div>
         
         <div class="sec3">
-            <p class="bio">Diseases</p>
+            <div class="diseases-header">
+                <h2>Diseases</h2>
+                <button type="button" class="add-disease-btn" onclick="toggleDiseaseForm()">+ Add Disease</button>
+            </div>
+            
+            <!-- Disease Form (Hidden by default) -->
+            <div id="diseaseFormSection" style="display: none;">
+                <form id="diseaseForm">
+                    <div class="form-group">
+                        <label for="diseaseName">Disease Name:</label>
+                        <input type="text" id="diseaseName" name="diseaseName" placeholder="e.g., Diabetes, Hypertension" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="diagnosisDate">Diagnosis Date:</label>
+                        <input type="date" id="diagnosisDate" name="diagnosisDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="severity">Severity:</label>
+                        <select id="severity" name="severity" required>
+                            <option value="">Select severity</option>
+                            <option value="mild">Mild</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="severe">Severe</option>
+                            <option value="chronic">Chronic</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="symptoms">Symptoms:</label>
+                        <textarea id="symptoms" name="symptoms" rows="3" placeholder="List the symptoms experienced"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="treatment">Treatment:</label>
+                        <textarea id="treatment" name="treatment" rows="3" placeholder="Current treatment plan"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="doctorNotes">Doctor Notes:</label>
+                        <textarea id="doctorNotes" name="doctorNotes" rows="2" placeholder="Additional notes from doctor"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="button" class="submit-disease-btn" onclick="submitDisease()">Submit Disease</button>
+                        <button type="button" class="cancel-disease-btn" onclick="toggleDiseaseForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Disease List -->
+            <div id="diseaseList"></div>
         </div>
     </div>
 

@@ -300,6 +300,119 @@ p {
     font-size: 0.9em;
 }
 
+/* Disease Section Styles */
+.diseases-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-disease-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.add-disease-btn:hover {
+    background-color: #45a049;
+}
+
+.submit-disease-btn {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.submit-disease-btn:hover {
+    background-color: #1976D2;
+}
+
+.cancel-disease-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-disease-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Disease History Items (similar to prescription history) */
+.disease-item {
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.disease-summary {
+    background-color: #f5f5f5;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.disease-summary:hover {
+    background-color: #e0e0e0;
+}
+
+.disease-details {
+    padding: 15px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+}
+
+.disease-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.disease-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.disease-date {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+}
+
+.disease-preview {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.disease-detail p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.disease-detail strong {
+    color: #333;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
@@ -326,12 +439,20 @@ p {
         width: 100%;
     }
     
-    .prescription-summary {
+    .prescription-summary,
+    .disease-summary {
         flex-direction: column;
         align-items: flex-start;
     }
     
-    .prescription-date {
+    .prescription-date,
+    .disease-date {
         margin-top: 5px;
+    }
+    
+    .diseases-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 }
