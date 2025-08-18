@@ -474,3 +474,265 @@ button:active {
         border: 1px solid #ccc;
     }
 }
+
+/* Enhanced Prescription History Styling */
+#prescriptionHistoryList {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.prescription-history-item {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.prescription-history-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--primary-color);
+}
+
+.prescription-history-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease;
+}
+
+.prescription-history-item:hover::before {
+    width: 8px;
+}
+
+.prescription-summary {
+    padding: 20px 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.prescription-summary:hover {
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.prescription-header {
+    flex: 1;
+}
+
+.prescription-header h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.prescription-header h3::before {
+    content: '📋';
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.prescription-date {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.prescription-date::before {
+    content: '📅';
+    margin-right: 5px;
+}
+
+.prescription-preview {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.dropdown-icon {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+.dropdown-icon.rotated {
+    transform: rotate(180deg);
+}
+
+.prescription-details {
+    background: rgba(249, 250, 251, 0.8);
+    border-top: 1px solid rgba(37, 99, 235, 0.1);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prescription-details[style*="display: block"],
+.prescription-details[style*="display:block"] {
+    max-height: 1000px;
+    padding: 25px;
+}
+
+.medicine-list {
+    display: grid;
+    gap: 15px;
+}
+
+.medicine-detail {
+    background: white;
+    border: 1px solid rgba(229, 231, 235, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.medicine-detail:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.medicine-detail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    transition: width 0.3s ease;
+}
+
+.medicine-detail:hover::before {
+    width: 8px;
+}
+
+.medicine-detail h4 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.medicine-detail h4::before {
+    content: '💊';
+    margin-right: 8px;
+}
+
+.medicine-detail p {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.medicine-detail p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.medicine-detail p:last-child {
+    margin-bottom: 0;
+}
+
+/* Empty State Styling */
+#prescriptionHistoryList:empty::before {
+    content: 'No prescriptions yet. Add your first prescription to see it here!';
+    display: block;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+/* Responsive Design for Prescription History */
+@media (max-width: 768px) {
+    .prescription-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .prescription-header h3 {
+        font-size: 1.2em;
+    }
+    
+    .medicine-detail {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .prescription-summary {
+        padding: 15px;
+    }
+    
+    .prescription-details[style*="display: block"],
+    .prescription-details[style*="display:block"] {
+        padding: 15px;
+    }
+    
+    .medicine-detail h4 {
+        font-size: 1.1em;
+    }
+}
+
+/* Animation for new prescriptions */
+@keyframes slideInPrescription {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.prescription-history-item.new {
+    animation: slideInPrescription 0.5s ease-out;
+}
+
+/* Print styles for prescription history */
+@media print {
+    .prescription-history-item {
+        break-inside: avoid;
+        margin-bottom: 15px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .prescription-details {
+        display: block !important;
+        max-height: none !important;
+        padding: 15px !important;
+    }
+    
+    .dropdown-icon {
+        display: none;
+    }
+}
