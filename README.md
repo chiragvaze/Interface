@@ -6,6 +6,9 @@ A comprehensive web-based prescription management system that allows healthcare 
 
 Check out the live application: [https://chiragvaze.github.io/Interface/](https://chiragvaze.github.io/Interface/)
 
+## About
+The Prescription Management System is a web-based application designed to assist healthcare professionals in managing patient prescriptions efficiently. It provides an intuitive interface for creating, tracking, and managing prescriptions, ensuring a streamlined workflow for medical practitioners.
+
 ## Features
 
 ### 🏥 Patient Profile Management
