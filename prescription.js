@@ -176,7 +176,7 @@ function togglePrescriptionDetails(prescriptionId) {
     }
 }
 
-// Function to toggle disease form
+    // Function to toggle disease form
 function toggleDiseaseForm() {
     const formSection = document.getElementById('diseaseFormSection');
     if (formSection.style.display === 'none') {
@@ -312,5 +312,19 @@ document.addEventListener('DOMContentLoaded', function() {
         treatment: "Metformin 500mg twice daily, diet control",
         doctorNotes: "Monitor blood sugar levels regularly",
         date: new Date()
+    });
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeToggle.querySelector('.theme-icon').textContent = '🌙';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.querySelector('.theme-icon').textContent = '☀️';
+        }
     });
 });
