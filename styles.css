@@ -1,12 +1,23 @@
 
 
-/* styles.css */
+/* Enhanced Modern Gradient Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.18);
+}
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    background: var(--primary-gradient);
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 h1 {
@@ -14,65 +25,124 @@ h1 {
     margin-top: 0;
     font-size: 2em;
     font-weight: bold;
-    /*text-transform: uppercase;*/
     letter-spacing: 1px;
     margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
+
 p {
     color: #666;
     line-height: 1.6;
     margin: 0 0 10px 0;
 }
+
 .d1 {
-    background-color: #c9fff8;
-    padding: 20px;
-    border-radius: 5px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 25px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
+
+.d1:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
 .profile-image {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 .text-content {
     flex: 1;
 }
+
 .name {
     font-size: 1.5em;
     margin: 0;
-    color: #333;
     font-weight: bold;
-    padding: 5px ;
+    padding: 5px;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
-.age{
+
+.age {
     color: #555;
     font-size: 1.2em;
-    margin: 5px
+    margin: 5px;
 }
+
 .gender {
     color: #f8f8f8;
     font-size: 15px;
     margin: 0px;
 }
-.gen{
+
+.gen {
     display: inline-block;
-    background-color: #b2bbbd;
-    padding: 0px 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 5px 15px;
     border-radius: 20px;
-    font-weight: bold;
-    color: #20dac4;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
 }
-.sec1 {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+.gen:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.sec1, .sec2, .sec3 {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 25px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     flex: 1;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sec1::before, .sec2::before, .sec3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+}
+
+.sec1:hover, .sec2:hover, .sec3:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .container {
@@ -80,28 +150,20 @@ p {
     justify-content: space-between;
     gap: 20px;
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.sec2 {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
-}
-
-.sec3 {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .d1 {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 /* Prescription Form Styles */
