@@ -2,6 +2,10 @@
 
 A comprehensive web-based prescription management system that allows healthcare professionals to create, manage, and track patient prescriptions with an intuitive and modern interface.
 
+## 🚀 Live Demo
+
+Check out the live application: [https://chiragvaze.github.io/Interface/](https://chiragvaze.github.io/Interface/)
+
 ## Features
 
 ### 🏥 Patient Profile Management
@@ -121,17 +125,22 @@ The application is fully responsive and works on:
 
 ## Setup and Running
 
+### Live Deployment (GitHub Pages)
+The application is automatically deployed via GitHub Pages. Visit the live demo link above to use the application.
+
+### Local Development
 No installation or dependencies required! Simply:
 
 1. Download or clone the project files
 2. Open either `index.html` or `prescription.html` in your web browser
 3. The application will load immediately with all functionality
 
-### For Local Development
+### For Code Modification
 If you want to modify the code:
 1. Use any code editor (VS Code recommended)
 2. Modify HTML, CSS, or JavaScript files as needed
 3. Refresh the browser to see changes
+4. Commit and push changes to GitHub to update the live deployment
 
 ## Features in Detail
 
@@ -191,6 +200,24 @@ The application uses modern web standards and works best in:
 - Firefox 75+
 - Safari 13+
 - Edge 80+
+
+## GitHub Deployment
+
+This project is deployed using GitHub Pages. To update the live deployment:
+
+1. Make your changes to the code
+2. Commit and push to the main branch
+3. GitHub Pages will automatically deploy the changes
+4. The live demo will be available at: https://chiragvaze.github.io/Interface/
+
+### GitHub Pages Setup
+If you need to set up GitHub Pages for a new repository:
+1. Go to your repository on GitHub
+2. Click on "Settings" → "Pages"
+3. Under "Source", select "Deploy from a branch"
+4. Choose "main" branch and "/ (root)" folder
+5. Click "Save"
+6. Your site will be published at `https://[username].github.io/[repository-name]/`
 
 ## License
 
