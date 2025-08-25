@@ -319,12 +319,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
+        console.log(`Current theme: ${currentTheme}`); // Debug log
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'light');
             themeToggle.querySelector('.theme-icon').textContent = '🌙';
+        } else if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'high-contrast');
+            themeToggle.querySelector('.theme-icon').textContent = '⚡'; // High contrast icon
         } else {
             document.documentElement.setAttribute('data-theme', 'dark');
             themeToggle.querySelector('.theme-icon').textContent = '☀️';
         }
+        console.log(`New theme set: ${document.documentElement.getAttribute('data-theme')}`); // Debug log
     });
 });

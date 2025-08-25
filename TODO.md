@@ -1,10 +1,10 @@
 # CSS Enhancement Plan - Prescription Form
 
 ## Phase 1: Theme System & Dark Mode
-- [ ] Add dark/light mode CSS variables
-- [ ] Create theme toggle component
+- [x] Add dark/light mode CSS variables
+- [x] Create theme toggle component
 - [ ] Add system preference detection
-- [ ] Implement smooth theme transitions
+- [x] Implement smooth theme transitions
 
 ## Phase 2: Advanced Animations & Effects
 - [ ] Add loading animations and skeleton screens

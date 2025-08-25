@@ -56,6 +56,19 @@
     --border-color: #ff6b35;
 }
 
+/* High contrast theme */
+[data-theme="high-contrast"] {
+    --primary-color: #ff6b35;
+    --secondary-color: #4ecdc4;
+    --accent-color: #45b7d1;
+    --background-gradient: linear-gradient(135deg, #000000 0%, #222222 100%);
+    --card-background: #000000;
+    --glass-background: rgba(0, 0, 0, 0.9);
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: #ff6b35;
+}
+
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
     :root {
