@@ -316,6 +316,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Theme toggle functionality
     const themeToggle = document.getElementById('themeToggle');
+    console.log('Theme toggle button found.'); // Debug log
+    if (!themeToggle) {
+        console.error('Theme toggle button not found!'); // Error log
+    }
     
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
