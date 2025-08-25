@@ -51,12 +51,9 @@ Check out the live application: [https://chiragvaze.github.io/Interface/](https:
 
 ```
 interface/
-├── index.html              # Basic prescription form version
-├── prescription.html       # Enhanced version with disease management
+├── index.html              # Main prescription application
 ├── prescription.js         # JavaScript functionality
-├── prescription.css        # Basic styling
-├── prescription-enhanced.css # Enhanced styling with glass morphism
-├── styles.css             # Additional styles
+├── prescription.css        # Styling for the application
 ├── README.md              # This documentation file
 └── image/
     ├── sample-profile-photo.avif
